@@ -90,8 +90,9 @@ android {
 }
 
 composeCompiler {
-    // Configure compose compiler options if required
     enableStrongSkippingMode = true
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    metricsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
 dependencies {
