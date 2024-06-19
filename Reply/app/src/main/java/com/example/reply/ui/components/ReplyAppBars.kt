@@ -27,7 +27,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DockedSearchBar
@@ -38,6 +37,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -86,45 +86,53 @@ fun ReplyDockedSearchBar(
 
     DockedSearchBar(
         modifier = modifier,
-        query = query,
-        onQueryChange = {
-            query = it
-        },
-        onSearch = { active = false },
-        active = active,
-        onActiveChange = {
-            active = it
-        },
-        placeholder = { Text(text = stringResource(id = R.string.search_emails)) },
-        leadingIcon = {
-            if (active) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.back_button),
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .clickable {
-                            active = false
-                            query = ""
-                        },
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(id = R.string.search),
-                    modifier = Modifier.padding(start = 16.dp),
-                )
-            }
-        },
-        trailingIcon = {
-            ReplyProfileImage(
-                drawableResource = R.drawable.avatar_6,
-                description = stringResource(id = R.string.profile),
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(32.dp)
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = query,
+                onQueryChange = {
+                    query = it
+                },
+                onSearch = { active = false },
+                expanded = active,
+                onExpandedChange = {
+                    active = it
+                },
+                placeholder = { Text(text = stringResource(id = R.string.search_emails)) },
+                leadingIcon = {
+                    if (active) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.back_button),
+                            modifier = Modifier
+                                .padding(start = 16.dp)
+                                .clickable {
+                                    active = false
+                                    query = ""
+                                },
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = stringResource(id = R.string.search),
+                            modifier = Modifier.padding(start = 16.dp),
+                        )
+                    }
+                },
+                trailingIcon = {
+                    ReplyProfileImage(
+                        drawableResource = R.drawable.avatar_6,
+                        description = stringResource(id = R.string.profile),
+                        modifier = Modifier
+                            .padding(12.dp)
+                            .size(32.dp)
+                    )
+                }
             )
         },
+        expanded = active,
+        onExpandedChange = {
+            active = it
+        }
     ) {
         if (searchResults.isNotEmpty()) {
             LazyColumn(

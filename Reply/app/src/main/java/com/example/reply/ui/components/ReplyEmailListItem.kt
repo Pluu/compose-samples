@@ -17,7 +17,6 @@
 package com.example.reply.ui.components
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -52,8 +51,7 @@ import androidx.compose.ui.unit.dp
 import com.example.reply.data.Email
 
 @OptIn(
-    ExperimentalFoundationApi::class,
-    ExperimentalAnimationApi::class
+    ExperimentalFoundationApi::class
 )
 @Composable
 fun ReplyEmailListItem(
